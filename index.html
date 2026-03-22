@@ -1,1 +1,251 @@
-# cat
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>عيد ميلاد علي 🎉</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  text-align:center;
+  overflow:hidden;
+  background:#dc143c;
+}
+
+/* القلوب */
+.heart{
+  position:absolute;
+  color:#ff4d6d;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-100vh);opacity:0;}
+}
+
+/* تسجيل الدخول */
+#loginPage{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.loginBox{
+  background:#f5e6d3;
+  padding:30px;
+  border-radius:40px;
+}
+
+input{
+  display:block;
+  margin:10px auto;
+  padding:10px;
+  border-radius:20px;
+  border:none;
+  width:200px;
+}
+
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#dc143c;
+  color:white;
+  cursor:pointer;
+}
+
+/* انتقال */
+#transition{
+  display:none;
+  background:#ffc0cb;
+  height:100vh;
+  color:#fff;
+  font-size:30px;
+  justify-content:center;
+  align-items:center;
+}
+
+/* الصور */
+#gallery{
+  display:none;
+  position:relative;
+  height:100vh;
+  background:#ffc0cb;
+  overflow:hidden;
+}
+
+.circle{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  animation:rotate 20s linear infinite;
+}
+
+@keyframes rotate{
+  from{transform:translate(-50%,-50%) rotate(0deg);}
+  to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+.imgBox{
+  position:absolute;
+  width:100px;
+  text-align:center;
+}
+
+.imgBox img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+}
+
+.caption{
+  font-size:12px;
+}
+
+/* الرسالة */
+#message{
+  display:none;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:60%;
+  font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loginPage">
+  <div class="loginBox">
+    <h2>ادخل الاسم و العمر 🎂</h2>
+    <input type="text" placeholder="الاسم">
+    <input type="password" id="age" placeholder="العمر">
+    <button onclick="login()">دخول</button>
+  </div>
+</div>
+
+<div id="transition"></div>
+
+<div id="gallery">
+  <div class="circle" id="circle"></div>
+</div>
+
+<div id="message"></div>
+
+<audio id="music" src="music.mp3"></audio>
+
+<script>
+
+/* قلوب متطايرة */
+function createHearts(){
+  setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(10+Math.random()*20)+"px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove();},6000);
+  },300);
+}
+
+/* تسجيل الدخول */
+function login(){
+  let age=document.getElementById("age").value;
+
+  if(age=="18"){
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("music").play();
+    createHearts();
+    startTransition();
+  }else{
+    alert("كلمة السر غلط 😅");
+  }
+}
+
+/* شاشة القي */
+function startTransition(){
+  let t=document.getElementById("transition");
+  t.style.display="flex";
+
+  let text="";
+  for(let i=0;i<500;i++){
+    text+="قي ";
+  }
+  t.innerHTML=text;
+
+  setTimeout(()=>{
+    t.style.display="none";
+    showImages();
+  },20000);
+}
+
+/* الصور الدائرية */
+function showImages(){
+  let circle=document.getElementById("circle");
+  document.getElementById("gallery").style.display="block";
+
+  let radius=150;
+
+  for(let i=0;i<8;i++){
+    let angle=(i/8)*2*Math.PI;
+
+    let x=radius*Math.cos(angle);
+    let y=radius*Math.sin(angle);
+
+    let div=document.createElement("div");
+    div.className="imgBox";
+    div.style.left=150+x+"px";
+    div.style.top=150+y+"px";
+
+    div.innerHTML=`
+      <img src="images/${i+1}.jpg">
+      <div class="caption">كل عام و انت بخير🎊🎉🤍</div>
+    `;
+
+    circle.appendChild(div);
+  }
+
+  setTimeout(()=>{
+    startMessage();
+  },8000);
+}
+
+/* الرسالة */
+function startMessage(){
+  document.getElementById("message").style.display="block";
+
+  let text=`علوش ي علوش كل سنه و انت طيب ي معاق و عقبال ال١٠٠ شمعه ي رب
+اينعم معرفكش من فتره طويله بس انت غبي طول عمره و هتفضل غبي حتى لو مكنتش كدا و اتجوز بسرعه علشان تطلع من لستة القي اللي عندي😂
+و بما انك ١٨ سنه دلوقتي عايزه اصدمك و اقولك انت هتعمل نتيجة غباوتك من النهارده و حبيت اذكرك لان القانون لا يحمي المغفلين
+و ان شاءالله السنه دي دتكون بداية خير و بركه عليك اللهم هب ل هذا المتخلف ثروه يتعجب لها من في الأرض و السماء و يكون في مستوى الثراء الفاحش افحش شي و ي رب تحقق كل أمنياتك و كل اللي نفسك في و ي رب هب له حبك و حب من بحبك و حب عمل صالح يقربه الي حبك و اجعل كل ساعه من حياته تقربا إليك و لا تأخذه من هذه الدنيا إلا و انت راضي عنه
+المهم بعد مكملنا دعاوي الشحاتين ديت😂😂😂 عايزه اقولك كل سنه و انت طيب ي علي و ربنا يكون معاك و يبعد عنك كل وحش و كل ظلم و اللهم لا يجعلك من الظالمين ي خادمي`;
+
+  let i=0;
+
+  function type(){
+    if(i<text.length){
+      document.getElementById("message").innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(type,40);
+    }
+  }
+
+  type();
+}
+
+</script>
+
+</body>
+  </html>
